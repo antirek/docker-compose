@@ -1,0 +1,16 @@
+db:
+    image: mongo:3.2
+    volumes:
+      - /var/lib/mongodb/:/data/db/
+    ports:
+      - "27017:27017"
+asterisk:
+    #image: antirek/astolua
+    build: .
+    net: host
+    restart: always
+    volumes: 
+      - "/tmp/var/log:/var/log"
+      - "/home/sergey/Projects/lua-dialplan:/tmp/lua-dialplan"
+      - "/etc/asterisk:/etc/asterisk"
+      - "/var/lib/asterisk/sounds:/var/lib/asterisk/sounds"
