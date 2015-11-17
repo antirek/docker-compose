@@ -4,9 +4,10 @@ db:
       - /var/lib/mongodb/:/data/db/
     ports:
       - "27017:27017"
+    restart: always
 asterisk:
     #image: antirek/astolua
-    build: .
+    build: ./
     net: host
     restart: always
     volumes: 
