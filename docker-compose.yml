@@ -12,7 +12,17 @@ lolo:
     net: host
     restart: always
     volumes: 
+      - /etc/localtime:/etc/localtime:ro
       - "/tmp/var/log:/var/log"
       - "/home/sergey/Projects/lua-dialplan:/tmp/lua-dialplan"
       - "/etc/asterisk:/etc/asterisk"
       - "/var/lib/asterisk/sounds:/var/lib/asterisk/sounds"
+configurator:
+    build: ./web/
+    net: host
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - "./store/etc/asterisk:/var/config/asterisk"
+      - "./store/records:/var/records"
+    command: node /tmp/viola-configurator/app.js
+    restart: always
