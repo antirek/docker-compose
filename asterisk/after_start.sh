@@ -3,10 +3,13 @@
 ln -s /tmp/lua-dialplan/ /usr/local/lib/lua/5.1/dialplan
 
 rm -f -v /etc/asterisk/extensions.lua
+
 ln -s /tmp/lua-dialplan/extensions.lua /etc/asterisk/extensions.lua
 
 asterisk
 
-sleep 1
+sleep 20
 
-asterisk -rvvvvvvv
+asterisk -rx "module reload pbx_lua.so"
+
+tail -f /var/log/asterisk/messages

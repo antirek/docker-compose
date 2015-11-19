@@ -4,4 +4,4 @@ docker run \
  -v /etc/asterisk:/etc/asterisk \
  -v /var/lib/asterisk/sounds:/var/lib/asterisk/sounds \
  --net=host \
- -i -t "astolua:sample"
+ -i -t "asterisk:1"
