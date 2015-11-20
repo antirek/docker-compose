@@ -1,11 +1,12 @@
 db:
     image: mongo:3.2
     volumes:
-      - /var/lib/mongodb/:/data/db/
       - /etc/localtime:/etc/localtime:ro
+      - /var/lib/mongodb/:/data/db/
     ports:
       - "27017:27017"
     restart: always
+
 lolo:
     #image: antirek/astolua
     build: ./asterisk/
@@ -13,16 +14,18 @@ lolo:
     restart: always
     volumes: 
       - /etc/localtime:/etc/localtime:ro
-      - "/tmp/var/log:/var/log"
+      - "./logs/asterisk/:/var/log/asterisk"
       - "/home/sergey/Projects/lua-dialplan:/tmp/lua-dialplan"
       - "/etc/asterisk:/etc/asterisk"
       - "/var/lib/asterisk/sounds:/var/lib/asterisk/sounds"
+
 configurator:
-    build: ./web/
+    build: ./configurator/
     net: host
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "./store/etc/asterisk:/var/config/asterisk"
       - "./store/records:/var/records"
+      - "./store/etc/asterisk:/etc/asterisk"
     command: node /tmp/viola-configurator/app.js
     restart: always
