@@ -2,7 +2,7 @@ db:
     image: mongo:3.2
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /var/lib/mongodb/:/data/db/
+      - ./store/mongodb/db:/data/db
     ports:
       - "27017:27017"
     restart: always
@@ -16,7 +16,7 @@ lolo:
       - /etc/localtime:/etc/localtime:ro
       - "./logs/asterisk/:/var/log/asterisk"
       - "/home/sergey/Projects/lua-dialplan:/tmp/lua-dialplan"
-      - "/etc/asterisk:/etc/asterisk"
+      - "./store/etc/asterisk/:/etc/asterisk/"
       - "/var/lib/asterisk/sounds:/var/lib/asterisk/sounds"
 
 configurator:
