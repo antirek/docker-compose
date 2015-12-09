@@ -9,6 +9,7 @@ db:
 
 lolo:
     #image: antirek/astolua
+    name: lolo
     build: ./asterisk/
     net: host
     restart: always
@@ -20,6 +21,7 @@ lolo:
       - "/var/lib/asterisk/sounds:/var/lib/asterisk/sounds"
 
 configurator:
+    name: ololo
     build: ./configurator/
     net: host
     volumes:
@@ -28,4 +30,13 @@ configurator:
       - "./store/records:/var/records"
       - "./store/etc/asterisk:/etc/asterisk"
     command: node /tmp/viola-configurator/app.js
+    restart: always
+
+cdr:
+    build: ./cdr/
+    net: host
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - "./store/var/lib/mysql:/var/lib/mysql"
+      - "./store/etc/mysql:/etc/mysql"
     restart: always
