@@ -9,7 +9,6 @@ db:
 
 lolo:
     #image: antirek/astolua
-    name: lolo
     build: ./asterisk/
     net: host
     restart: always
@@ -21,7 +20,6 @@ lolo:
       - "/var/lib/asterisk/sounds:/var/lib/asterisk/sounds"
 
 configurator:
-    name: ololo
     build: ./configurator/
     net: host
     volumes:

@@ -30,5 +30,5 @@ CREATE TABLE `cdr` (
    INDEX `dcontext` (`dcontext`),
    INDEX `clid` (`clid`)
 )
-COLLATE='utf8'
+COLLATE='utf8_bin' 
 ENGINE=InnoDB DEFAULT CHARSET=utf8;
