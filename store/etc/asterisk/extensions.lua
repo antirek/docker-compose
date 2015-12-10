@@ -1,5 +1,6 @@
 
 local dial = function (context, extension)
+    app.progress();
     app.noop("context: " .. context .. ", extension: " .. extension);
     app.dial('SIP/' .. extension, 10);
     
@@ -8,9 +9,9 @@ local dial = function (context, extension)
     app.set("CHANNEL(language)=ru");
 
     if dialstatus == 'BUSY' then
-        app.playback("followme/sorry");        
+        app.playback("followme/sorry", "noanswer");        
     elseif dialstatus == 'CHANUNAVAIL' then 
-        app.playback("followme/sorry");
+        app.playback("followme/sorry", "noanswer");
     end;
 
     app.hangup();
@@ -42,9 +43,9 @@ extensions = {
 
         ["_1XX"] = dial;
 
-        ["_12XX"] = queue;
+        ["_2XX"] = ivr;
 
-        ["200"] = ivr;
+        ["_3XX"] = queue;
 
         ["_NXXXXXX"] = outgoing_route_function;
     };
