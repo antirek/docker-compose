@@ -1,8 +1,9 @@
 #!/bin/bash
 
-asterisk
 
-sleep 20
+sleep 60
+
+asterisk
 
 asterisk -rx "module reload pbx_lua.so"
 
