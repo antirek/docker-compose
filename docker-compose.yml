@@ -8,14 +8,12 @@ db:
     restart: always
 
 lolo:
-    #image: antirek/astolua
     build: ./asterisk/
     net: host
     restart: always
     volumes: 
       - /etc/localtime:/etc/localtime:ro
       - "./logs/asterisk/:/var/log/asterisk"
-      - "/home/sergey/Projects/lua-dialplan:/tmp/lua-dialplan"
       - "./store/etc/asterisk/:/etc/asterisk/"
       - "/var/lib/asterisk/sounds:/var/lib/asterisk/sounds"
 
