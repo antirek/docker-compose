@@ -26,6 +26,7 @@ configurator:
       - "./store/etc/asterisk:/var/config/asterisk"
       - "./store/records:/var/records"
       - "./store/etc/asterisk:/etc/asterisk"
+      - "/home/sergey/Projects/viola-configurator:/tmp/viola-configurator"
     command: node /tmp/viola-configurator/app.js
     restart: always
 

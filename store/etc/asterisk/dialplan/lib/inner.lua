@@ -33,9 +33,9 @@ function inner(dbHelper)
         local basePath = '/tmp/records';
 
         if (recordCalled == 'yes') then
-            local fname = string.format("%s_%s-%s-%s_%s:%s:%s", uniqueid, date.year, date.month, date.day, date.hour, date.min, date.sec);
+            local fname = string.format("%s_%s-%s-%s_%s:%s:%s", uniqueid, date.year, date.month, date.day, date.hour, date.minute, date.second);
             WAV = "/wav/";
-            MP3 = string.format("/mp3/%s/%s/%s/", date.year, date.month, date.day);
+            MP3 = string.format("/mp3/%s-%s-%s/", date.year, date.month, date.day);
 
             local recordCommand = "/usr/bin/nice -n 19 mkdir -p %s && /usr/bin/lame -b 16 --silent %s%s.wav %s%s.mp3";
             local options = string.format(recordCommand, basePath..MP3, basePath..WAV, fname, basePath..MP3, fname);
@@ -47,13 +47,13 @@ function inner(dbHelper)
     end;
 
     function call_device (context, extension) 
-        local device = dbHelper.findDeviceByExtension(extension);
-        inner_call(device);
+        local peername = dbHelper.findDeviceByExtension(extension);
+        inner_call('SIP/'..peername);
     end;
 
     function call_mobile (context, extension) 
         local mobile = dbHelper.findMobileByExtension(extension);
-        inner_call(mobile);
+        inner_call('SIP/'..mobile);
     end;
 
     return {

@@ -23,13 +23,13 @@ function db (config)
             extension = extension
         });
         local item = cursor:next();
-        local device;
+        local peername;
 
         if (item) then
-            device = item.device;
-            app.noop("device: "..inspect(device));
+            peername = item.peername;
+            app.noop("peername: "..inspect(peername));
         end;
-        return device;
+        return peername;
     end;
 
     function findMobileByExtension (extension)
