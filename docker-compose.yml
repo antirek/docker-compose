@@ -16,6 +16,7 @@ lolo:
       - "./logs/asterisk/:/var/log/asterisk"
       - "./store/etc/asterisk/:/etc/asterisk/"
       - "/var/lib/asterisk/sounds:/var/lib/asterisk/sounds"
+      - "./store/records:/tmp/records"
 
 configurator:
     build: ./configurator/

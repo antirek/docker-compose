@@ -26,19 +26,22 @@ function inner(dbHelper)
     function checkRecord ()
         local date = os.date("*t");
         local peername = channel.CHANNEL("peername"):get();
-        app.noop('peername: '..peername);
+        app.noop('check record for peername: '..peername);
 
         local recordCalled = dbHelper.checkRecord(peername);
-        local unique = channel.UNIQUEID:get();
+        local uniqueid = channel.UNIQUEID:get();
+        local basePath = '/tmp/records';
 
         if (recordCalled == 'yes') then
-            local fname = string.format("%s-%s%s%s", unique, date.day, date.month, date.year);
-            WAV = "/tmp/wav/";
-            MP3 = string.format("/tmp/records/%s/%s/%s/", date.year, date.month, date.day);
-            local options = string.format("/usr/bin/nice -n 19 /usr/bin/lame -b 16 --silent %s%s.wav %s%s.mp3 && rm -f %s%s.wav", WAV, fname, MP3, fname, WAV, fname);
-            app.mixmonitor(string.format("%s%s.wav,b,%s", WAV, fname, options));
+            local fname = string.format("%s_%s-%s-%s_%s:%s:%s", uniqueid, date.year, date.month, date.day, date.hour, date.min, date.sec);
+            WAV = "/wav/";
+            MP3 = string.format("/mp3/%s/%s/%s/", date.year, date.month, date.day);
 
-            channel["CDR(recordingfile)"]:set(fname..".mp3");
+            local recordCommand = "/usr/bin/nice -n 19 mkdir -p %s && /usr/bin/lame -b 16 --silent %s%s.wav %s%s.mp3";
+            local options = string.format(recordCommand, basePath..MP3, basePath..WAV, fname, basePath..MP3, fname);
+
+            app.mixmonitor(string.format("%s%s.wav,b,%s", basePath..WAV, fname, options));
+            channel["CDR(record)"]:set(string.format("%s%s.mp3", MP3, fname));
         end;
         return;
     end;
