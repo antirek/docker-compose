@@ -47,13 +47,13 @@ function inner(dbHelper)
     end;
 
     function call_device (context, extension) 
-        local peername = dbHelper.findDeviceByExtension(extension);
-        inner_call('SIP/'..peername);
+        local user = dbHelper.findUserByExtension(extension);
+        inner_call('SIP/'..user.peername);
     end;
 
     function call_mobile (context, extension) 
-        local mobile = dbHelper.findMobileByExtension(extension);
-        inner_call('SIP/'..mobile);
+        local user = dbHelper.findUserByExtension(extension);
+        inner_call('SIP/'..user.mobile);
     end;
 
     return {

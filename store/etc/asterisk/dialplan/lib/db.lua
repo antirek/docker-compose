@@ -17,51 +17,33 @@ function db (config)
         return exts;
     end;
 
-    function findDeviceByExtension (extension)
+    function findUserByExtension (extension)
         app.noop('extension for find'..extension);
         local cursor = db:query("viola.extensions", {
             extension = extension
         });
-        local item = cursor:next();
-        local peername;
+        local user = cursor:next();
+        app.noop(item);
 
-        if (item) then
-            peername = item.peername;
-            app.noop("peername: "..inspect(peername));
+        if (user) then            
+            app.noop("peername: "..inspect(user.peername));
         end;
-        return peername;
-    end;
-
-    function findMobileByExtension (extension)
-        app.noop('extension for find: '..extension);
-        local cursor = db:query("viola.extensions", {
-            extension = string.sub(extension, 2);
-        });
-        local item = cursor:next();
-        local mobile;
-        
-        if (item) then
-            mobile = item.mobile;
-            app.noop("mobile: "..inspect(mobile));
-        end;
-        return mobile;
-    end;
+        return user;
+    end;    
 
     function checkRecord (peername)
-        local device = 'SIP/'..peername;
-        app.noop(device)
         local cursor = db:query("viola.extensions", {
-            device = device
+            peername = peername
         });
-        local item = cursor:next();
-        app.noop(item)
+
+        local user = cursor:next();
+        app.noop(user);
         local record;
 
-        if (item) then
-            record = item.record;
+        if (user) then
+            record = user.record;
             app.noop("record: "..record);
         end;
-
         return record;
     end;
 
@@ -112,8 +94,7 @@ function db (config)
     end;
 
     return {
-        ["findDeviceByExtension"] = findDeviceByExtension; 
-        ["findMobileByExtension"] = findMobileByExtension;
+        ["findUserByExtension"] = findUserByExtension;        
         ["checkRecord"] = checkRecord;
         ["findIVRByExtension"] = findIVRByExtension;
         ["findQueueByExtension"] = findQueueByExtension;
