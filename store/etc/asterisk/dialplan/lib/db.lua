@@ -19,7 +19,7 @@ function db (config)
 
     function findUserByExtension (extension)
         app.noop('extension for find'..extension);
-        local cursor = db:query("viola.extensions", {
+        local cursor = db:query("viola.users", {
             extension = extension
         });
         local user = cursor:next();
@@ -32,7 +32,7 @@ function db (config)
     end;    
 
     function checkRecord (peername)
-        local cursor = db:query("viola.extensions", {
+        local cursor = db:query("viola.users", {
             peername = peername
         });
 
@@ -80,7 +80,7 @@ function db (config)
 
     function findQueueByExtension (extension)
         app.noop('extension for find in queue: '..extension);
-        local cursor = db:query("viola.queue", {
+        local cursor = db:query("viola.queues", {
             extension = extension
         });
         local item = cursor:next();
