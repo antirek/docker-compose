@@ -33,7 +33,7 @@ function inner(dbHelper)
         local basePath = '/tmp/records';
 
         if (recordCalled == 'yes') then
-            local fname = string.format("%s_%s-%s-%s_%s:%s:%s", uniqueid, date.year, date.month, date.day, date.hour, date.minute, date.second);
+            local fname = string.format("%s_%s-%s-%s_%s:%s:%s", uniqueid, date.year, date.month, date.day, date.hour, date.min, date.sec);
             WAV = "/wav/";
             MP3 = string.format("/mp3/%s-%s-%s/", date.year, date.month, date.day);
 
