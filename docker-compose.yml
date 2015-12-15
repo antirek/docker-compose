@@ -15,6 +15,7 @@ lolo:
       - /etc/localtime:/etc/localtime:ro
       - "./logs/asterisk/:/var/log/asterisk"
       - "./store/etc/asterisk/:/etc/asterisk/"
+      - "./store/var/share/sounds:/var/share/sounds"
       - "/var/lib/asterisk/sounds:/var/lib/asterisk/sounds"
       - "./store/records:/tmp/records"
 
@@ -26,6 +27,7 @@ configurator:
       - "./store/etc/asterisk:/var/config/asterisk"
       - "./store/records:/var/records"
       - "./store/etc/asterisk:/etc/asterisk"
+      - "./store/var/share/sounds:/var/share/sounds"
       - "/home/sergey/Projects/viola-configurator:/tmp/viola-configurator"
     command: node /tmp/viola-configurator/app.js
     restart: always
