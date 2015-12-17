@@ -40,3 +40,10 @@ cdr:
       - "./store/var/lib/mysql:/var/lib/mysql"
       - "./store/etc/mysql:/etc/mysql"
     restart: always
+
+cdrviewer:
+    build: ./cdrviewer/
+    net: host
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
