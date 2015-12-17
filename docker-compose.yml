@@ -46,4 +46,5 @@ cdrviewer:
     net: host
     volumes:
       - /etc/localtime:/etc/localtime:ro
+      - "./store/records:/var/records"
     restart: always
