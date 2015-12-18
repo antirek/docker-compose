@@ -6,7 +6,7 @@ function inner(dbHelper)
 
         if (target) then
             app.progress();
-            app.dial(target, 10);        
+            app.dial(target, 10);
         else 
             app.hangup(34);
         end;
@@ -15,11 +15,19 @@ function inner(dbHelper)
         app.noop('dialstatus: '..dialstatus);
         app.set("CHANNEL(language)=ru");
 
+        function playSorry ()
+            app.playback("followme/sorry","noanswer");
+            channel["CDR(record)"]:set("");
+        end;
+
         if dialstatus == 'BUSY' then
-            app.playback("followme/sorry");        
+            playSorry();
         elseif dialstatus == 'CHANUNAVAIL' then 
-            app.playback("followme/sorry");
+            playSorry();
+        elseif dialstatus == 'NOANSWER' then
+            playSorry();
         end; 
+
         app.hangup();
     end;
 
