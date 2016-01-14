@@ -14,7 +14,10 @@ RUN npm install && \
 RUN apt-get update && \
 	apt-get install -y mysql-client-5.5
 
+RUN echo "4"
+
 ADD after_start.sh /after_start.sh
+
 
 RUN chmod +x /after_start.sh
 

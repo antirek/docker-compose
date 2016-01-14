@@ -46,5 +46,8 @@ cdrviewer:
     net: host
     volumes:
       - /etc/localtime:/etc/localtime:ro
+      - "./store/etc/violacdr:/etc/violacdr/"
       - "./store/records:/var/records"
     restart: always
+    environment:
+      VIOLA_CDR_CONFIG: /etc/violacdr/config
