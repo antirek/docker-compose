@@ -15,6 +15,9 @@ RUN mkdir -p /tmp/viola-cdr/public/js/build
 
 RUN npm run build
 
+RUN apt-get update && \
+	apt-get install -y mysql-client-5.5
+
 ADD after_start.sh /after_start.sh
 
 RUN chmod +x /after_start.sh
