@@ -5,15 +5,11 @@ RUN cd /tmp && \
 
 WORKDIR /tmp/viola-cdr
 
-RUN npm install
-
-RUN npm install bower -g
-
-RUN bower install --allow-root
-
-RUN mkdir -p /tmp/viola-cdr/public/js/build
-
-RUN npm run build
+RUN npm install && \
+	npm install bower -g && \
+	bower install --allow-root && \
+	mkdir -p /tmp/viola-cdr/public/js/build && \
+	npm run build
 
 RUN apt-get update && \
 	apt-get install -y mysql-client-5.5
@@ -23,4 +19,3 @@ ADD after_start.sh /after_start.sh
 RUN chmod +x /after_start.sh
 
 CMD ["/after_start.sh"]
-
