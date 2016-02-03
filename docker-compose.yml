@@ -40,12 +40,12 @@ cdr:
     restart: always
 
 cdrviewer:
-    build: ./cdrviewer/
+    image: antirek/ryocdr
     net: host
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - "./store/etc/violacdr:/etc/violacdr/"
+      - "./store/etc/ryocdr:/etc/ryocdr/"
       - "./store/records:/var/records"
     restart: always
     environment:
-      VIOLA_CDR_CONFIG: /etc/violacdr/config
+      RYOCDR_CONFIG: /etc/ryocdr/config
