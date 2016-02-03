@@ -24,11 +24,14 @@ configurator:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "./store/etc/asterisk:/var/config/asterisk"
+      - "./store/etc/configurator:/etc/configurator"
       - "./store/records:/var/records"
       - "./store/etc/asterisk:/etc/asterisk"
       - "./store/var/share/sounds:/var/share/sounds"
     command: node /tmp/viola-configurator/app.js
     restart: always
+    environment:
+      VIOLACONFIGURATOR_CONFIG: /etc/configurator/config
 
 cdr:
     build: ./cdr/
