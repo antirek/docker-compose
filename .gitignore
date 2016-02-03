@@ -29,3 +29,5 @@ node_modules
 
 store/mongodb/db
 store/var/lib/mysql/
+store/var/lib/mysql/ib_logfile0
+store/var/lib/mysql/ibdata1
